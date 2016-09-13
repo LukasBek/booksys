@@ -208,7 +208,6 @@ public class StaffUI
       bs.makeReservation(d.getCovers(),
 			 bs.getCurrentDate(),
 			 d.getTime(),
-			 d.getTableNumber(),
 			 d.getCustomerName(),
 			 d.getPhoneNumber()) ;
     }

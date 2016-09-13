@@ -30,8 +30,7 @@ class Restaurant
     return cm.getCustomer(name, phone) ;
   }
   
-  Table getTable(int n)
-  {
+  Table getTable(int n){
     return tm.getTable(n) ;
   }
 
@@ -40,10 +39,7 @@ class Restaurant
     return TableMapper.getInstance().getTableNumbers() ;
   }
 
-  public Booking makeReservation(int covers, Date date,
-				     Time time,
-				     int tno, String name, String phone)
-  {
+  public Booking makeReservation(int covers, Date date, Time time, int tno, String name, String phone){
     Table t = getTable(tno) ;
     Customer c = getCustomer(name, phone) ;
     return bm.createReservation(covers, date, time, t, c, null) ;

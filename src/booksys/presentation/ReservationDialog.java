@@ -59,9 +59,6 @@ class ReservationDialog extends BookingDialog
     
     add(coversLabel) ;
     add(covers) ;
-
-    add(tableNumberLabel) ;
-    add(tableNumber) ;
     
     add(ok) ;
     add(cancel) ;
