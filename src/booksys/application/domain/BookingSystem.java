@@ -79,8 +79,8 @@ public class BookingSystem
 
 	public void makeReservation(int covers, Date date, Time time, String name, String phone){
 		// TODO: THIS
-		int tno = getTable(time, null);
-		if(tno != 11){
+		int tno = getTable(time, covers, null);
+		if(tno < 11){
 			Booking b = restaurant.makeReservation(covers, date, time, tno, name, phone) ;
 			currentBookings.addElement(b) ;
 			notifyObservers() ;
@@ -158,27 +158,40 @@ public class BookingSystem
 			notifyObservers() ;
 		}
 	}
-	
-	private int getTable(Time startTime, Booking ignore)
+
+	private int getTable(Time startTime, int covers, Booking ignore)
 	{
 		boolean booked = true ;
 		int tno = 1;
+		if (covers > 2){
+			tno = 5;
+		}
 
 		Time endTime = (Time) startTime.clone() ;
-		endTime.setHours(endTime.getHours() + 2) ;
-
-		Enumeration enume = currentBookings.elements() ;
-		if(enume.hasMoreElements()){
-			while (booked && enume.hasMoreElements()) {
+		endTime.setHours(endTime.getHours() + 2);
+		
+		while (booked && tno < 11){
+			Enumeration enume = currentBookings.elements();
+			int sum = currentBookings.size();
+			int tal = 0;
+						
+			while(enume.hasMoreElements()){
+				
 				Booking b = (Booking) enume.nextElement() ;
 				if (b != ignore && b.getTableNumber() == tno
 						&& startTime.before(b.getEndTime())
 						&& endTime.after(b.getTime())) 
 				{
-					tno++;
+					break;
+				} else {
+					tal++;
 				}
+				
 			}
-			
+			if(sum == tal){
+				return tno;
+			}
+			tno++;
 		}
 		return tno ;
 	}
