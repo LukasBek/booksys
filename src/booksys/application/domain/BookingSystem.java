@@ -88,10 +88,9 @@ public class BookingSystem
 		else{
 			observerMessage("No tables at currently selected time", false);
 		}
-
-
 			
 	}
+	
 
 	public void makeWalkIn(int covers, Date date, Time time, int tno)
 	{
